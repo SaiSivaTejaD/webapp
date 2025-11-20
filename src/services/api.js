@@ -1,10 +1,10 @@
 // API Base URL - Update this to your Node.js backend URL
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = 'http://localhost:8000/api';
 
 // Helper function for API calls
 const apiCall = async (endpoint, options = {}) => {
   const token = localStorage.getItem('adminToken');
-  
+
   const config = {
     ...options,
     headers: {
@@ -16,12 +16,12 @@ const apiCall = async (endpoint, options = {}) => {
 
   try {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
-    
+
     if (!response.ok) {
       const error = await response.json().catch(() => ({}));
       throw new Error(error.message || `HTTP error! status: ${response.status}`);
     }
-    
+
     return await response.json();
   } catch (error) {
     console.error('API call error:', error);
@@ -31,16 +31,16 @@ const apiCall = async (endpoint, options = {}) => {
 
 // Auth API
 export const authAPI = {
-  login: (credentials) => apiCall('/auth/login', {
+  login: (credentials) => apiCall('/login', {
     method: 'POST',
     body: JSON.stringify(credentials),
   }),
-  
+
   logout: () => {
     localStorage.removeItem('adminToken');
     localStorage.removeItem('adminUser');
   },
-  
+
   isAuthenticated: () => {
     return !!localStorage.getItem('adminToken');
   },

@@ -64,7 +64,7 @@ const createCRUDAPI = (resource) => ({
 });
 
 // Export CRUD APIs for each table
-export const memberAPI = createCRUDAPI('member');
+export const memberAPI = createCRUDAPI('members');
 export const passAPI = createCRUDAPI('passes');
 export const paymentAPI = createCRUDAPI('payments');
 export const registrationAPI = createCRUDAPI('registrations');
